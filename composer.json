@@ -1,0 +1,20 @@
+{
+    "name": "jrtashjian/curatewp-related-posts",
+    "description": "Curate your WordPress content",
+    "keywords": [ "wordpress", "curate", "curation", "news", "related posts" ],
+    "type": "wordpress-plugin",
+    "authors": [
+        {
+            "name": "JR Tashjian",
+            "homepage": "https://curatewp.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CurateWP\\RelatedPosts\\": "includes"
+        }
+    },
+    "require": {
+        "php": ">=5.6"
+    }
+}
