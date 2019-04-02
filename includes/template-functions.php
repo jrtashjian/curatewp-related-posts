@@ -18,7 +18,7 @@
  *
  * @return string The rendered HTML.
  */
-function curatewp_related_posts( $args = array(), $post_id = 0 ) {
+function curatewp_related_posts( $args = array() ) {
 	$post_id = empty( $args['post_id'] ) ? get_the_ID() : $args['post_id'];
 
 	$cache_group   = 'curatewp';

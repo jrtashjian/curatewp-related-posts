@@ -143,7 +143,12 @@ class Core {
 	 * @return string
 	 */
 	public static function render_block_related_posts( $attributes, $content ) {
-		$post_id = empty( $_GET['post_id'] ) ? null : abs( $_GET['post_id'] );
-		return curatewp_related_posts( $attributes, $post_id );
+		$args = array_merge(
+			$attributes,
+			array(
+				'post_id' => empty( $_GET['post_id'] ) ? null : abs( $_GET['post_id'] ),
+			)
+		);
+		return curatewp_related_posts( $args );
 	}
 }
