@@ -69,7 +69,7 @@ class Core {
 	 * @return string The rendered template HTML.
 	 */
 	public static function shortcode( $atts ) {
-		return curatewp_related_posts();
+		return curatewp_related_posts( $atts );
 	}
 
 	/**
@@ -143,6 +143,7 @@ class Core {
 	 * @return string
 	 */
 	public static function render_block_related_posts( $attributes, $content ) {
-		return curatewp_related_posts();
+		$post_id = empty( $_GET['post_id'] ) ? null : abs( $_GET['post_id'] );
+		return curatewp_related_posts( $attributes, $post_id );
 	}
 }

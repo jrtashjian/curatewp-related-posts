@@ -14,11 +14,12 @@
  * @since 1.0.0
  *
  * @param array  $args Optional. Arguments to configure a section.
+ * @param int $post_id Optional. The post ID to query related posts for.
  *
  * @return string The rendered template HTML.
  */
-function curatewp_related_posts( $args = null ) {
-	$post_id = get_the_ID();
+function curatewp_related_posts( $args = null, $post_id = 0 ) {
+	$post_id = empty( $post_id ) ? get_the_ID() : $post_id;
 
 	$post_categories   = get_the_terms( $post_id, 'category' );
 	$post_category_ids = empty( $post_categories ) ? array() : wp_list_pluck( $post_categories, 'term_id' );

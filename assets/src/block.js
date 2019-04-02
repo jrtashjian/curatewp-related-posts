@@ -2,6 +2,7 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { ServerSideRender } = wp.components;
+const { withSelect } = wp.data;
 const { createElement } = wp.element;
 
 const icon = createElement('svg', { width: 20, height: 20 },
@@ -20,9 +21,17 @@ registerBlockType('curatewp/related-posts', {
         __('Related', 'cwprp'),
     ],
 
-    edit: function () {
-        return <ServerSideRender block="curatewp/related-posts" />;
-    },
+    edit: withSelect(function (select) {
+        return {
+            post_id: select('core/editor').getCurrentPostId(),
+        };
+    })(function (props) {
+        console.log(props);
+        return <ServerSideRender
+            block="curatewp/related-posts"
+            urlQueryArgs={{ post_id: props.post_id }}
+        />;
+    }),
 
     save: function () {
         return null;
