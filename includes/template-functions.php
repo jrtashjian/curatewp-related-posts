@@ -91,13 +91,18 @@ function curatewp_related_posts( $args = array() ) {
 
 	<div class="<?php echo esc_attr( join( ' ', [] ) ); ?>">
 		<div class="curatewp-section-header">
-			<h3 class="curatewp-section-header__title"><?php echo esc_html( $args['title'] ); ?></h3>
+			<?php if ( ! empty( $args['title'] ) ) : ?>
+				<h3 class="curatewp-section-header__title"><?php echo esc_html( $args['title'] ); ?></h3>
+			<?php endif; ?>
+
 			<?php if ( $args['description'] ) : ?>
 				<p class="curatewp-section-header__description"><?php echo esc_html( $args['description'] ); ?></p>
 			<?php endif; ?>
 		</div>
+
 		<?php if ( ! empty( $related_posts ) ) : ?>
 			<div class="curatewp-section-collection curatewp-section-collection--default">
+
 				<?php foreach ( $related_posts as $related_post_id ) : ?>
 					<div <?php post_class( 'curatewp-card curatewp-card--wide curatewp-grid--whole', $related_post_id ); ?>>
 
@@ -121,6 +126,7 @@ function curatewp_related_posts( $args = array() ) {
 
 					</div>
 				<?php endforeach; ?>
+
 			</div>
 		<?php endif; ?>
 	</div>

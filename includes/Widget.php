@@ -47,11 +47,13 @@ class Widget extends \WP_Widget {
 
 		echo wp_kses_post( $args['before_widget'] );
 
-		if ( $title ) {
-			echo wp_kses_post( $args['before_title'] . $title . $args['after_title'] );
-		}
-
-		echo wp_kses_post( 'related posts' );
+		echo wp_kses_post(
+			curatewp_related_posts(
+				array(
+					'title' => $title,
+				)
+			)
+		);
 
 		echo wp_kses_post( $args['after_widget'] );
 	}
