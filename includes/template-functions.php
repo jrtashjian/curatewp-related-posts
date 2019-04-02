@@ -4,7 +4,7 @@
  *
  * @since 1.0.0
  *
- * @package CWPRP
+ * @package CurateWP
  * @author JR Tashjian <jr@curatewp.com>
  */
 
@@ -16,41 +16,116 @@
  * @param array  $args Optional. Arguments to configure a section.
  * @param int $post_id Optional. The post ID to query related posts for.
  *
- * @return string The rendered template HTML.
+ * @return string The rendered HTML.
  */
-function curatewp_related_posts( $args = null, $post_id = 0 ) {
-	$post_id = empty( $post_id ) ? get_the_ID() : $post_id;
+function curatewp_related_posts( $args = array(), $post_id = 0 ) {
+	$post_id = empty( $args['post_id'] ) ? get_the_ID() : $args['post_id'];
 
-	$post_categories   = get_the_terms( $post_id, 'category' );
-	$post_category_ids = empty( $post_categories ) ? array() : wp_list_pluck( $post_categories, 'term_id' );
+	$cache_group   = 'curatewp';
+	$cached_key    = $cache_group . '_related_posts_' . $post_id . '_posts';
+	$related_posts = wp_cache_get( $cached_key, $cache_group );
 
-	$post_tags    = get_the_terms( $post_id, 'post_tag' );
-	$post_tag_ids = empty( $post_tags ) ? array() : wp_list_pluck( $post_tags, 'term_id' );
+	if ( false === $related_posts ) {
+		$related_posts = array();
 
-	$posts_query = new \WP_Query(
-		array(
-			'category__in'   => $post_category_ids,
-			'tag__in'        => $post_tag_ids,
-			'post__not_in'   => array( $post_id ),
-			'posts_per_page' => 10,
-		)
-	);
+		$post_categories   = get_the_terms( $post_id, 'category' );
+		$post_category_ids = empty( $post_categories ) ? array() : wp_list_pluck( $post_categories, 'term_id' );
 
-	if ( ! $posts_query->have_posts() ) {
-		return '';
+		$post_tags    = get_the_terms( $post_id, 'post_tag' );
+		$post_tag_ids = empty( $post_tags ) ? array() : wp_list_pluck( $post_tags, 'term_id' );
+
+		$query_args = array(
+			'category__in'           => $post_category_ids,
+			'tag__in'                => $post_tag_ids,
+			'post__not_in'           => array( $post_id ),
+			'posts_per_page'         => empty( $args['posts_per_page'] ) ? 10 : abs( $args['posts_per_page'] ),
+			'no_found_rows'          => true,
+			'update_post_meta_cache' => false,
+			'update_post_term_cache' => false,
+		);
+
+		/**
+		 * Filters the query arguments for the current object in the section.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $query_args The object's query arguments.
+		 */
+		$query_args = apply_filters( 'curatewp_related_posts_object_query_args', $query_args );
+
+		$posts_query = new \WP_Query( $query_args );
+
+		if ( ! $posts_query->have_posts() ) {
+			return '';
+		}
+
+		$related_posts = array_merge(
+			$related_posts,
+			wp_list_pluck( $posts_query->posts, 'ID' )
+		);
+
+		/**
+		 * Filters the related post ids for the section.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $related_posts The queried post ids.
+		 */
+		$related_posts = apply_filters( 'curatewp_related_posts_posts', $related_posts );
+
+		/**
+		 * Filters the cache time for the related posts object.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param int $cache_time_in_seconds The cache time in seconds.
+		 */
+		$cache_time_in_seconds = apply_filters( 'curatewp_related_posts_objects_cache_time', DAY_IN_SECONDS );
+
+		wp_cache_set( $cached_key, $related_posts, $cache_group, $cache_time_in_seconds );
 	}
-
-	$html   = array();
-	$html[] = '<ul>';
-
-	while ( $posts_query->have_posts() ) {
-		$posts_query->the_post();
-		$html[] = '<li>' . get_the_title( $posts_query->post->ID ) . '</li>';
-	}
-
-	$html[] = '</ul>';
 
 	wp_reset_postdata();
+	ob_start();
+	?>
 
-	return implode( '', $html );
+	<div class="<?php echo esc_attr( join( ' ', [] ) ); ?>">
+		<div class="curatewp-section-header">
+			<h3 class="curatewp-section-header__title"><?php echo esc_html( $args['title'] ); ?></h3>
+			<?php if ( $args['description'] ) : ?>
+				<p class="curatewp-section-header__description"><?php echo esc_html( $args['description'] ); ?></p>
+			<?php endif; ?>
+		</div>
+		<?php if ( ! empty( $related_posts ) ) : ?>
+			<div class="curatewp-section-collection curatewp-section-collection--default">
+				<?php foreach ( $related_posts as $related_post_id ) : ?>
+					<div <?php post_class( 'curatewp-card curatewp-card--wide curatewp-grid--whole', $related_post_id ); ?>>
+
+						<?php
+						if ( has_post_thumbnail( $related_post_id ) ) :
+							$curatewp_post_thumbnail_url = wp_get_attachment_url( get_post_thumbnail_id( $related_post_id ) );
+							?>
+							<div class="curatewp-card__image" style="background-image:url(<?php echo esc_url( $curatewp_post_thumbnail_url ); ?>);"></div>
+						<?php endif; ?>
+
+						<div class="curatewp-card__content">
+							<h4 class="curatewp-card__title">
+								<a href="<?php the_permalink( $related_post_id ); ?>">
+									<?php echo esc_html( get_the_title( $related_post_id ) ); ?>
+								</a>
+							</h4>
+							<div class="curatewp-card__date">
+								<?php echo esc_html( get_the_date( '', $related_post_id ) ); ?>
+							</div>
+						</div>
+
+					</div>
+				<?php endforeach; ?>
+			</div>
+		<?php endif; ?>
+	</div>
+
+	<?php
+	$output = ob_get_clean();
+	return $output;
 }
