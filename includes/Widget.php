@@ -43,14 +43,16 @@ class Widget extends \WP_Widget {
 	 * @param array $instance The settings for the particular instance of the widget.
 	 */
 	public function widget( $args, $instance ) {
-		$title = ! empty( $instance['title'] ) ? $instance['title'] : '';
+		$title       = ! empty( $instance['title'] ) ? $instance['title'] : '';
+		$description = ! empty( $instance['description'] ) ? $instance['description'] : '';
 
 		echo wp_kses_post( $args['before_widget'] );
 
 		echo wp_kses_post(
 			curatewp_related_posts(
 				array(
-					'title' => $title,
+					'title'       => $title,
+					'description' => $description,
 				)
 			)
 		);
@@ -76,6 +78,10 @@ class Widget extends \WP_Widget {
 			$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		}
 
+		if ( ! empty( $new_instance['description'] ) ) {
+			$instance['description'] = sanitize_text_field( $new_instance['description'] );
+		}
+
 		return $instance;
 	}
 
@@ -88,7 +94,8 @@ class Widget extends \WP_Widget {
 	 * @param array $instance Current settings.
 	 */
 	public function form( $instance ) {
-		$title = isset( $instance['title'] ) ? $instance['title'] : '';
+		$title       = isset( $instance['title'] ) ? $instance['title'] : '';
+		$description = isset( $instance['description'] ) ? $instance['description'] : '';
 		?>
 		<div class="curatewp-widget-form-controls">
 			<p>
@@ -99,6 +106,14 @@ class Widget extends \WP_Widget {
 					id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
 					name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>"
 					value="<?php echo esc_attr( $title ); ?>" />
+			</p>
+			<p>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'description' ) ); ?>">
+					<?php esc_attr_e( 'Description:', 'cwprp' ); ?>
+				</label>
+				<textarea rows="5" cols="30" class="widefat"
+					id="<?php echo esc_attr( $this->get_field_id( 'description' ) ); ?>"
+					name="<?php echo esc_attr( $this->get_field_name( 'description' ) ); ?>"><?php echo esc_textarea( $description ); ?></textarea>
 			</p>
 		</div>
 		<?php
