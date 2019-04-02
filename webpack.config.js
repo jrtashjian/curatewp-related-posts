@@ -13,6 +13,7 @@ module.exports = {
     mode,
     entry: {
         'block': './assets/src/block.js',
+        'layouts': './assets/src/layouts.scss',
     },
     output: {
         path: __dirname + '/assets/dist/',
