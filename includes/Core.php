@@ -32,6 +32,8 @@ class Core {
 		require_once CWPRP_PLUGIN_DIR . '/includes/template-functions.php';
 
 		add_action( 'wp_enqueue_scripts', array( get_called_class(), 'load_layout_styles' ) );
+		add_action( 'enqueue_block_assets', array( get_called_class(), 'load_layout_styles' ) );
+
 		add_action( 'widgets_init', array( get_called_class(), 'register_widgets' ) );
 		add_shortcode( 'curatewp_related_posts', array( get_called_class(), 'shortcode' ) );
 
