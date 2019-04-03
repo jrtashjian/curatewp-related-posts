@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Related Posts by CurateWP
+Plugin Name: CurateWP - Related Posts
 Plugin URI: https://curatewp.com/
 Description: TODO
 Version: 1.0.0
