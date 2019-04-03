@@ -2,7 +2,7 @@
 /*
 Plugin Name: CurateWP - Related Posts
 Plugin URI: https://curatewp.com/
-Description: TODO
+Description: Display related posts within the current post, in a widget, and in your theme.
 Version: 1.0.0
 Author: JR Tashjian
 Author URI: https://jrtashjian.com
