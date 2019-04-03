@@ -3,21 +3,21 @@
     "scripts": {
         "watch": "cross-env webpack --watch",
         "build": "cross-env NODE_ENV=production webpack",
-        "lang": "chokidar ./cwp-related-posts.php ./includes/*.php --silent --command 'wp-pot --src \"**/*.php\" --write-file --dest-file \"languages/cwprp.pot\" --package \"CWPRP\" --domain \"cwprp\" --last-translator \"JR Tashjian <info@curatewp.com>\" --team \"CurateWP <info@curatewp.com>\" --bug-report \"https://curatewp.com/contact\"' --initial"
+        "i18n": "npm run i18n-pot && npm run i18n-json",
+        "i18n-pot": "wp i18n make-pot ./ ./languages/cwprp.pot --headers='{\"Last-Translator\":\"JR Tashjian <jr@curatewp.com>\",\"Language-Team\":\"CurateWP <info@curatewp.com>\"}' && cp ./languages/cwprp.pot ./languages/cwprp-en_US.po",
+        "i18n-json": "wp i18n make-json languages/"
     },
     "devDependencies": {
         "@babel/core": "^7.4.0",
         "@babel/preset-env": "^7.4.2",
         "@babel/preset-react": "^7.0.0",
         "babel-loader": "^8.0.5",
-        "chokidar-cli": "^1.2.2",
         "cross-env": "^5.2.0",
         "css-loader": "^2.1.1",
         "mini-css-extract-plugin": "^0.5.0",
         "node-sass": "^4.11.0",
         "sass-loader": "^7.1.0",
         "webpack": "^4.29.6",
-        "webpack-cli": "^3.3.0",
-        "wp-pot-cli": "^1.2.3"
+        "webpack-cli": "^3.3.0"
     }
 }
