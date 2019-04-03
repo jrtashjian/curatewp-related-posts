@@ -57,6 +57,8 @@ class Core {
 	/**
 	 * Determine if CurateWP is active on the site.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return bool
 	 */
 	public static function is_curatewp_active() {
@@ -130,6 +132,15 @@ class Core {
 		);
 	}
 
+	/**
+	 * Add a block category for CurateWP if it doesn't exist already.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $categories Array of block categories.
+	 *
+	 * @return array
+	 */
 	public static function block_categories( $categories ) {
 		$category_slugs = wp_list_pluck( $categories, 'slug' );
 		return in_array( 'curatewp', $category_slugs, true ) ? $categories : array_merge(
