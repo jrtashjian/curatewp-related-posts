@@ -78,8 +78,6 @@ class Core {
 	 * @since 1.0.0
 	 */
 	public static function load_block_assets() {
-		$debug = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true ) || ( isset( $_GET['script_debug'] ) ) ? '' : '.min'; // CSRF okay.
-
 		/**
 		 * Filters whether to load the layout css.
 		 *
@@ -107,12 +105,10 @@ class Core {
 	 * @since 1.0.0
 	 */
 	public static function load_block_editor_assets() {
-		$debug = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG === true ) || ( isset( $_GET['script_debug'] ) ) ? '' : '.min'; // CSRF okay.
-
 		wp_enqueue_script(
 			'cwprp-block-js',
 			CWPRP_PLUGIN_URL . 'assets/dist/block.build.js',
-			array( 'wp-blocks', 'wp-element', 'wp-components' ),
+			array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-data' ),
 			CWPRP_VERSION,
 			true // Enqueue script in the footer.
 		);
