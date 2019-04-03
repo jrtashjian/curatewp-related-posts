@@ -31,6 +31,7 @@ class Core {
 		require_once CWPRP_PLUGIN_DIR . '/vendor/autoload.php';
 		require_once CWPRP_PLUGIN_DIR . '/includes/template-functions.php';
 
+		add_action( 'wp_enqueue_scripts', array( get_called_class(), 'load_layout_styles' ) );
 		add_action( 'widgets_init', array( get_called_class(), 'register_widgets' ) );
 		add_shortcode( 'curatewp_related_posts', array( get_called_class(), 'shortcode' ) );
 
@@ -91,11 +92,11 @@ class Core {
 	}
 
 	/**
-	 * Load block assets for the front-end and block editor.
+	 * Load layout styles.
 	 *
 	 * @since 1.0.0
 	 */
-	public static function load_block_assets() {
+	public static function load_layout_styles() {
 		/**
 		 * Filters whether to load the layout css.
 		 *
@@ -115,6 +116,20 @@ class Core {
 				CWPRP_VERSION
 			);
 		}
+	}
+
+	/**
+	 * Load block assets for the front-end and block editor.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function load_block_assets() {
+		wp_enqueue_style(
+			'cwprp-block-css',
+			CWPRP_PLUGIN_URL . 'assets/dist/block.build.css',
+			array(),
+			CWPRP_VERSION
+		);
 	}
 
 	/**
