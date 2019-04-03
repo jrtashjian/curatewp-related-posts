@@ -73,7 +73,7 @@ class Widget extends \WP_Widget {
 	 *
 	 * @return array Settings to save or bool false to cancel saving.
 	 */
-	public function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter
 		$instance = array();
 
 		if ( ! empty( $new_instance['title'] ) ) {

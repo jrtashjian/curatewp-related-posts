@@ -13,8 +13,7 @@
  *
  * @since 1.0.0
  *
- * @param array  $args Optional. Arguments to configure a section.
- * @param int $post_id Optional. The post ID to query related posts for.
+ * @param array $args Optional. Arguments to configure a section.
  *
  * @return string The rendered HTML.
  */

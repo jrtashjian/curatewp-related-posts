@@ -182,11 +182,11 @@ class Core {
 	 *
 	 * @return string
 	 */
-	public static function render_block_related_posts( $attributes, $content ) {
+	public static function render_block_related_posts( $attributes, $content ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter
 		$args = array_merge(
 			$attributes,
 			array(
-				'post_id' => empty( $_GET['post_id'] ) ? null : abs( $_GET['post_id'] ),
+				'post_id' => empty( $_GET['post_id'] ) ? null : abs( $_GET['post_id'] ), // phpcs:ignore WordPress.Security.NonceVerification
 			)
 		);
 		return curatewp_related_posts( $args );

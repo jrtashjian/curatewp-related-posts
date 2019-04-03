@@ -1,4 +1,5 @@
-<?php
+<?php // phpcs:ignore Squiz.Commenting.FileComment
+
 /*
 Plugin Name: CurateWP - Related Posts
 Plugin URI: https://curatewp.com/
