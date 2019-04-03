@@ -55,6 +55,18 @@ class Core {
 	}
 
 	/**
+	 * Determine if CurateWP is active on the site.
+	 *
+	 * @return bool
+	 */
+	public static function is_curatewp_active() {
+		if ( ! is_admin() ) {
+			include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		return is_plugin_active( 'curatewp/curatewp.php' );
+	}
+
+	/**
 	 * Register our widget.
 	 *
 	 * @since 1.0.0
@@ -91,7 +103,7 @@ class Core {
 		 *
 		 * @param bool $load_layout_css Whether the layout css should be loaded. Default true.
 		 */
-		$load_layout_css = apply_filters( 'cwprp_load_layout_css', true );
+		$load_layout_css = apply_filters( 'cwprp_load_layout_css', ! self::is_curatewp_active() );
 
 		if ( $load_layout_css ) {
 			wp_enqueue_style(
