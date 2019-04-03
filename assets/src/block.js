@@ -1,7 +1,7 @@
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { ServerSideRender, RangeControl, PanelBody } = wp.components;
+const { ServerSideRender, RangeControl, TextControl, TextareaControl, PanelBody } = wp.components;
 const { withSelect } = wp.data;
 const { InspectorControls } = wp.editor;
 const { createElement } = wp.element;
@@ -27,6 +27,12 @@ registerBlockType('curatewp/related-posts', {
             type: 'string',
             default: 5,
         },
+        title: {
+            type: 'string',
+        },
+        description: {
+            type: 'string',
+        },
     },
 
     edit: withSelect(function (select) {
@@ -35,6 +41,8 @@ registerBlockType('curatewp/related-posts', {
         };
     })(function (props) {
         const onChangeNumber = (number) => props.setAttributes({ number });
+        const onChangeTitle = (title) => props.setAttributes({ title });
+        const onChangeDescription = (description) => props.setAttributes({ description });
         return (
             <div>
                 <InspectorControls>
@@ -43,8 +51,17 @@ registerBlockType('curatewp/related-posts', {
                             label={__('Number of posts to show', 'cwprp')}
                             value={props.attributes.number}
                             min={1}
-                            onChange={onChangeNumber}
-                        />
+                            onChange={onChangeNumber} />
+
+                        <TextControl
+                            label={__('Title', 'cwprp')}
+                            value={props.attributes.title}
+                            onChange={onChangeTitle} />
+
+                        <TextareaControl
+                            label={__('Description', 'cwprp')}
+                            value={props.attributes.description}
+                            onChange={onChangeDescription} />
                     </PanelBody>
                 </InspectorControls>
                 <ServerSideRender

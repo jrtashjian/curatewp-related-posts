@@ -43,7 +43,11 @@ class Core {
 			register_block_type(
 				'curatewp/related-posts',
 				array(
-					'attributes'      => array( 'number' => array( 'type' => 'integer' ) ),
+					'attributes'      => array(
+						'number'      => array( 'type' => 'integer' ),
+						'title'       => array( 'type' => 'string' ),
+						'description' => array( 'type' => 'string' ),
+					),
 					'render_callback' => array( get_called_class(), 'render_block_related_posts' ),
 				)
 			);
