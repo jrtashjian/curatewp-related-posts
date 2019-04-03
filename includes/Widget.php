@@ -45,6 +45,7 @@ class Widget extends \WP_Widget {
 	public function widget( $args, $instance ) {
 		$title       = ! empty( $instance['title'] ) ? $instance['title'] : '';
 		$description = ! empty( $instance['description'] ) ? $instance['description'] : '';
+		$number      = ! empty( $instance['number'] ) ? $instance['number'] : '';
 
 		echo wp_kses_post( $args['before_widget'] );
 
@@ -53,6 +54,7 @@ class Widget extends \WP_Widget {
 				array(
 					'title'       => $title,
 					'description' => $description,
+					'number'      => $number,
 				)
 			)
 		);
@@ -82,6 +84,10 @@ class Widget extends \WP_Widget {
 			$instance['description'] = sanitize_text_field( $new_instance['description'] );
 		}
 
+		if ( ! empty( $new_instance['number'] ) ) {
+			$instance['number'] = sanitize_text_field( $new_instance['number'] );
+		}
+
 		return $instance;
 	}
 
@@ -96,6 +102,7 @@ class Widget extends \WP_Widget {
 	public function form( $instance ) {
 		$title       = isset( $instance['title'] ) ? $instance['title'] : '';
 		$description = isset( $instance['description'] ) ? $instance['description'] : '';
+		$number      = isset( $instance['number'] ) ? $instance['number'] : '';
 		?>
 		<div class="curatewp-widget-form-controls">
 			<p>
@@ -114,6 +121,17 @@ class Widget extends \WP_Widget {
 				<textarea rows="5" cols="30" class="widefat"
 					id="<?php echo esc_attr( $this->get_field_id( 'description' ) ); ?>"
 					name="<?php echo esc_attr( $this->get_field_name( 'description' ) ); ?>"><?php echo esc_textarea( $description ); ?></textarea>
+			</p>
+			<p>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>">
+					<?php esc_attr_e( 'Number of posts to show:', 'cwprp' ); ?>
+				</label>
+				<input type="number" class="tiny-text"
+					id="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>"
+					name="<?php echo esc_attr( $this->get_field_name( 'number' ) ); ?>"
+					value="<?php echo esc_attr( $number ?: 10 ); ?>"
+					step="1"
+				/>
 			</p>
 		</div>
 		<?php
