@@ -43,7 +43,7 @@ class Core {
 			register_block_type(
 				'curatewp/related-posts',
 				array(
-					'attributes'      => array(),
+					'attributes'      => array( 'number' => array( 'type' => 'integer' ) ),
 					'render_callback' => array( get_called_class(), 'render_block_related_posts' ),
 				)
 			);
@@ -108,7 +108,7 @@ class Core {
 		wp_enqueue_script(
 			'cwprp-block-js',
 			CWPRP_PLUGIN_URL . 'assets/dist/block.build.js',
-			array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-data' ),
+			array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-data', 'wp-editor' ),
 			CWPRP_VERSION,
 			true // Enqueue script in the footer.
 		);

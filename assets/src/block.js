@@ -1,8 +1,9 @@
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { ServerSideRender } = wp.components;
+const { ServerSideRender, RangeControl, PanelBody } = wp.components;
 const { withSelect } = wp.data;
+const { InspectorControls } = wp.editor;
 const { createElement } = wp.element;
 
 const icon = createElement('svg', { width: 20, height: 20 },
@@ -21,16 +22,38 @@ registerBlockType('curatewp/related-posts', {
         __('Related', 'cwprp'),
     ],
 
+    attributes: {
+        number: {
+            type: 'string',
+            default: 5,
+        },
+    },
+
     edit: withSelect(function (select) {
         return {
             post_id: select('core/editor').getCurrentPostId(),
         };
     })(function (props) {
-        console.log(props);
-        return <ServerSideRender
-            block="curatewp/related-posts"
-            urlQueryArgs={{ post_id: props.post_id }}
-        />;
+        const onChangeNumber = (number) => props.setAttributes({ number });
+        return (
+            <div>
+                <InspectorControls>
+                    <PanelBody initialOpen={true}>
+                        <RangeControl
+                            label={__('Number of posts to show', 'cwprp')}
+                            value={props.attributes.number}
+                            min={1}
+                            onChange={onChangeNumber}
+                        />
+                    </PanelBody>
+                </InspectorControls>
+                <ServerSideRender
+                    block="curatewp/related-posts"
+                    attributes={props.attributes}
+                    urlQueryArgs={{ post_id: props.post_id }}
+                />
+            </div>
+        );
     }),
 
     save: function () {
