@@ -129,7 +129,7 @@ class Widget extends \WP_Widget {
 				<input type="number" class="tiny-text"
 					id="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>"
 					name="<?php echo esc_attr( $this->get_field_name( 'number' ) ); ?>"
-					value="<?php echo esc_attr( $number ?: 10 ); ?>"
+					value="<?php echo esc_attr( $number ?: 5 ); ?>"
 					step="1"
 				/>
 			</p>
