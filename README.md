@@ -15,7 +15,7 @@ Display related posts within the current post, in a widget, and in your theme.
 
 Related Posts by [CurateWP](https://curatewp.com) is a lightweight plugin that allows you to display a list of related posts for the content on your website.
 
-Quickly and easily add a section of related posts from within the post editor ro in your theme's code. The provided shortcode, Gutenberg block, and template function gives you the flexibility you need.
+Quickly and easily add a section of related posts from within the post editor or in your theme's code. The provided shortcode, Gutenberg block, and template function gives you the flexibility you need.
 
 ## Installation
 
