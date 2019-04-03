@@ -24,7 +24,7 @@ registerBlockType('curatewp/related-posts', {
 
     attributes: {
         number: {
-            type: 'string',
+            type: 'number',
             default: 5,
         },
         title: {
