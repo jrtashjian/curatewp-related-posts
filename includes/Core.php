@@ -126,7 +126,7 @@ class Core {
 		wp_enqueue_script(
 			'cwprp-block-js',
 			CWPRP_PLUGIN_URL . 'assets/dist/block.build.js',
-			array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-data', 'wp-editor' ),
+			array( 'wp-blocks', 'wp-i18n', 'wp-components', 'wp-data', 'wp-editor' ),
 			CWPRP_VERSION,
 			true // Enqueue script in the footer.
 		);
