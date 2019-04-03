@@ -3,9 +3,10 @@
     "scripts": {
         "watch": "cross-env webpack --watch",
         "build": "cross-env NODE_ENV=production webpack",
-        "i18n": "npm run i18n-pot && npm run i18n-json",
+        "i18n": "npm run i18n-pot && npm run i18n-json && npm run i18n-mo",
         "i18n-pot": "wp i18n make-pot ./ ./languages/cwprp.pot --headers='{\"Last-Translator\":\"JR Tashjian <jr@curatewp.com>\",\"Language-Team\":\"CurateWP <info@curatewp.com>\"}' && cp ./languages/cwprp.pot ./languages/cwprp-en_US.po",
-        "i18n-json": "wp i18n make-json languages/"
+        "i18n-json": "wp i18n make-json languages/",
+        "i18n-mo": "for file in `find . -name \"*.po\"` ; do msgfmt -o ${file/.po/.mo} $file ; done"
     },
     "devDependencies": {
         "@babel/core": "^7.4.0",
