@@ -94,7 +94,7 @@ function curatewp_related_posts( $args = array() ) {
 				<h3 class="curatewp-section-header__title"><?php echo esc_html( $args['title'] ); ?></h3>
 			<?php endif; ?>
 
-			<?php if ( $args['description'] ) : ?>
+			<?php if ( ! empty( $args['description'] ) ) : ?>
 				<p class="curatewp-section-header__description"><?php echo esc_html( $args['description'] ); ?></p>
 			<?php endif; ?>
 		</div>
