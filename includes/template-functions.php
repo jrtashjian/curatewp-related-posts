@@ -38,11 +38,14 @@ function curatewp_related_posts( $args = array() ) {
 			'category__in'           => $post_category_ids,
 			'tag__in'                => $post_tag_ids,
 			'post__not_in'           => array( $post_id ),
-			'posts_per_page'         => empty( $args['posts_per_page'] ) ? 10 : abs( $args['posts_per_page'] ),
 			'no_found_rows'          => true,
 			'update_post_meta_cache' => false,
 			'update_post_term_cache' => false,
 		);
+
+		if ( ! empty( $args['number'] ) ) {
+			$query_args['posts_per_page'] = abs( $args['number'] );
+		}
 
 		/**
 		 * Filters the query arguments for the current object in the section.
