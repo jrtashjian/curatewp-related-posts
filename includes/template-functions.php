@@ -22,7 +22,7 @@ function curatewp_related_posts( $args = array() ) {
 	$post_id = empty( $args['post_id'] ) ? get_the_ID() : $args['post_id'];
 
 	$cache_group   = 'curatewp';
-	$cached_key    = $cache_group . '_related_posts_' . $post_id . '_posts';
+	$cached_key    = $cache_group . '_related_posts_' . md5( $post_id . wp_json_encode( $args ) ) . '_posts';
 	$related_posts = wp_cache_get( $cached_key, $cache_group );
 
 	if ( false === $related_posts ) {
