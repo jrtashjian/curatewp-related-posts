@@ -32,7 +32,7 @@ class Core {
 		require_once CWPRP_PLUGIN_DIR . '/includes/template-functions.php';
 
 		add_action( 'widgets_init', array( get_called_class(), 'register_widgets' ) );
-		add_shortcode( 'curatewp-related-posts', array( get_called_class(), 'shortcode' ) );
+		add_shortcode( 'curatewp_related_posts', array( get_called_class(), 'shortcode' ) );
 
 		// Ensure a block can be registered before we try and register one.
 		if ( function_exists( 'register_block_type' ) ) {
