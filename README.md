@@ -1,6 +1,6 @@
 # CurateWP - Related Posts
 **Contributors:** jrtashjian\
-**Tags:** curatewp, curation, related, engagement, gutenberg, block, shortcode\
+**Tags:** curatewp, curation, related, related posts, related content, recommended, engagement, similar, similar posts, gutenberg, block, shortcode\
 **Requires at least:** 4.9.8\
 **Tested up to:** 5.1.1\
 **Requires PHP:** 5.6\
@@ -8,7 +8,7 @@
 **License:** GPLv2 or later\
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
-Display related posts within the current post, in a widget, and in your theme.
+Keep visitors engaged on your blog by highlighting relevant content of each published post.
 
 ## Description
 **Does not require** [CurateWP](https://curatewp.com).
