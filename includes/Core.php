@@ -148,11 +148,13 @@ class Core {
 				'editor_style'    => 'cwprp-block',
 				'attributes'      => array(
 					'className'   => array( 'type' => 'string' ),
-					'number'      => array( 'type' => 'integer' ),
 					'title'       => array( 'type' => 'string' ),
 					'description' => array( 'type' => 'string' ),
 					'in_category' => array( 'type' => 'boolean' ),
 					'in_tag'      => array( 'type' => 'boolean' ),
+					'number'      => array( 'type' => 'integer' ),
+					'orderby'     => array( 'type' => 'string' ),
+					'order'       => array( 'type' => 'string' ),
 				),
 				'render_callback' => array( get_called_class(), 'render_block_related_posts' ),
 			)

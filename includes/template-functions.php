@@ -44,6 +44,8 @@ function curatewp_related_posts( $args = array() ) {
 			array(
 				'post__not_in'           => array( $post_id ),
 				'posts_per_page'         => empty( $args['number'] ) ? 5 : abs( $args['number'] ),
+				'order'                  => empty( $args['order'] ) ? '' : $args['order'],
+				'orderby'                => empty( $args['orderby'] ) ? 'rand' : $args['orderby'],
 				'no_found_rows'          => true,
 				'update_post_meta_cache' => false,
 				'update_post_term_cache' => false,

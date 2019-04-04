@@ -3,7 +3,7 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const {
     ServerSideRender, PanelBody, SVG, Path,
-    RangeControl, TextControl, TextareaControl, ToggleControl,
+    RangeControl, TextControl, TextareaControl, ToggleControl, SelectControl,
 } = wp.components;
 const { withSelect } = wp.data;
 const { InspectorControls } = wp.editor;
@@ -23,10 +23,6 @@ registerBlockType('curatewp/related-posts', {
     ],
 
     attributes: {
-        number: {
-            type: 'number',
-            default: 5,
-        },
         title: {
             type: 'string',
         },
@@ -40,6 +36,18 @@ registerBlockType('curatewp/related-posts', {
         in_tag: {
             type: 'boolean',
             default: false,
+        },
+        number: {
+            type: 'number',
+            default: 5,
+        },
+        orderby: {
+            type: 'string',
+            default: 'rand',
+        },
+        order: {
+            type: 'string',
+            default: '',
         },
     },
 
@@ -61,6 +69,46 @@ registerBlockType('curatewp/related-posts', {
                             min={1}
                             onChange={onChangeNumber} />
 
+                        <SelectControl
+                            label={__('Order by', 'cwprp')}
+                            value={`${props.attributes.orderby}/${props.attributes.order}`}
+                            options={[
+                                {
+                                    /* translators: label for ordering posts by date in descending order. */
+                                    label: __('Newest to Oldest', 'cwprp'),
+                                    value: 'date/desc',
+                                },
+                                {
+                                    /* translators: label for ordering posts by date in ascending order. */
+                                    label: __('Oldest to Newest', 'cwprp'),
+                                    value: 'date/asc',
+                                },
+                                {
+                                    /* translators: label for ordering posts by title in ascending order. */
+                                    label: __('A → Z', 'cwprp'),
+                                    value: 'title/asc',
+                                },
+                                {
+                                    /* translators: label for ordering posts by title in descending order. */
+                                    label: __('Z → A', 'cwprp'),
+                                    value: 'title/desc',
+                                },
+                                {
+                                    /* translators: label for randomly ordering posts. */
+                                    label: __('Random', 'cwprp'),
+                                    value: 'rand/',
+                                },
+                            ]}
+                            onChange={(value) => {
+                                const [newOrderBy, newOrder] = value.split('/');
+                                if (newOrder !== props.attributes.order) {
+                                    props.setAttributes({ order: newOrder });
+                                }
+                                if (newOrderBy !== props.attributes.orderby) {
+                                    props.setAttributes({ orderby: newOrderBy });
+                                }
+                            }} />
+
                         <TextControl
                             label={__('Title', 'cwprp')}
                             value={props.attributes.title}
@@ -73,15 +121,16 @@ registerBlockType('curatewp/related-posts', {
 
                         <ToggleControl
                             label={__('In Category', 'cwprp')}
-                            help={ props.attributes.in_category ? 'Including posts from the same categories.' : 'Toggle to show posts from the same categories.'}
+                            help={props.attributes.in_category ? 'Including posts from the same categories.' : 'Toggle to show posts from the same categories.'}
                             checked={props.attributes.in_category}
                             onChange={() => props.setAttributes({ in_category: !props.attributes.in_category })} />
 
                         <ToggleControl
                             label={__('In Tag', 'cwprp')}
-                            help={ props.attributes.in_tag ? 'Including posts from the same tags.' : 'Toggle to show posts from the same tags.'}
+                            help={props.attributes.in_tag ? 'Including posts from the same tags.' : 'Toggle to show posts from the same tags.'}
                             checked={props.attributes.in_tag}
                             onChange={() => props.setAttributes({ in_tag: !props.attributes.in_tag })} />
+
                     </PanelBody>
                 </InspectorControls>
                 <ServerSideRender
