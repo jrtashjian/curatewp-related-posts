@@ -56,9 +56,6 @@ registerBlockType('curatewp/related-posts', {
             post_id: select('core/editor').getCurrentPostId(),
         };
     })(function (props) {
-        const onChangeNumber = (number) => props.setAttributes({ number });
-        const onChangeTitle = (title) => props.setAttributes({ title });
-        const onChangeDescription = (description) => props.setAttributes({ description });
         return (
             <div>
                 <InspectorControls>
@@ -67,7 +64,7 @@ registerBlockType('curatewp/related-posts', {
                             label={__('Number of posts to show', 'cwprp')}
                             value={props.attributes.number}
                             min={1}
-                            onChange={onChangeNumber} />
+                            onChange={(number) => props.setAttributes({ number })} />
 
                         <SelectControl
                             label={__('Order by', 'cwprp')}
@@ -112,12 +109,12 @@ registerBlockType('curatewp/related-posts', {
                         <TextControl
                             label={__('Title', 'cwprp')}
                             value={props.attributes.title}
-                            onChange={onChangeTitle} />
+                            onChange={(title) => props.setAttributes({ title })} />
 
                         <TextareaControl
                             label={__('Description', 'cwprp')}
                             value={props.attributes.description}
-                            onChange={onChangeDescription} />
+                            onChange={(description) => props.setAttributes({ description })} />
 
                         <ToggleControl
                             label={__('In Category', 'cwprp')}
