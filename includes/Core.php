@@ -147,6 +147,7 @@ class Core {
 				'editor_script'   => 'cwprp-block',
 				'editor_style'    => 'cwprp-block',
 				'attributes'      => array(
+					'className'   => array( 'type' => 'string' ),
 					'number'      => array( 'type' => 'integer' ),
 					'title'       => array( 'type' => 'string' ),
 					'description' => array( 'type' => 'string' ),
@@ -198,6 +199,7 @@ class Core {
 			$attributes,
 			array(
 				'post_id' => empty( $_GET['post_id'] ) ? null : abs( $_GET['post_id'] ), // phpcs:ignore WordPress.Security.NonceVerification
+				'class'   => empty( $attributes['className'] ) ? '' : sanitize_text_field( $attributes['className'] ),
 			)
 		);
 		return curatewp_related_posts( $args );

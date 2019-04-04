@@ -18,10 +18,11 @@
  * @return string The rendered HTML.
  */
 function curatewp_related_posts( $args = array() ) {
-	$post_id = empty( $args['post_id'] ) ? get_the_ID() : $args['post_id'];
+	$post_id    = empty( $args['post_id'] ) ? get_the_ID() : $args['post_id'];
+	$section_id = md5( $post_id . wp_json_encode( $args ) );
 
 	$cache_group   = 'curatewp';
-	$cached_key    = $cache_group . '_related_posts_' . md5( $post_id . wp_json_encode( $args ) ) . '_posts';
+	$cached_key    = $cache_group . '_related_posts_' . $section_id . '_posts';
 	$related_posts = wp_cache_get( $cached_key, $cache_group );
 
 	if ( false === $related_posts ) {
@@ -84,11 +85,17 @@ function curatewp_related_posts( $args = array() ) {
 		wp_cache_set( $cached_key, $related_posts, $cache_group, $cache_time_in_seconds );
 	}
 
+	// Convert class string to array and append additional wrapper classes.
+	$classes   = explode( ' ', $args['class'] );
+	$classes[] = 'curatewp-section';
+	$classes[] = 'curatewp-section-' . $section_id;
+	$classes[] = 'curatewp-section-related-posts';
+
 	wp_reset_postdata();
 	ob_start();
 	?>
 
-	<div class="<?php echo esc_attr( join( ' ', [] ) ); ?>">
+	<div class="<?php echo esc_attr( join( ' ', array_filter( $classes ) ) ); ?>">
 		<div class="curatewp-section-header">
 			<?php if ( ! empty( $args['title'] ) ) : ?>
 				<h3 class="curatewp-section-header__title"><?php echo esc_html( $args['title'] ); ?></h3>
