@@ -27,21 +27,27 @@ function curatewp_related_posts( $args = array() ) {
 
 	if ( false === $related_posts ) {
 		$related_posts = array();
+		$query_args    = array();
 
-		$post_categories   = get_the_terms( $post_id, 'category' );
-		$post_category_ids = empty( $post_categories ) ? array() : wp_list_pluck( $post_categories, 'term_id' );
+		if ( ! empty( $args['in_category'] ) || empty( $args['in_tag'] ) ) {
+			$post_categories            = get_the_terms( $post_id, 'category' );
+			$query_args['category__in'] = empty( $post_categories ) ? array() : wp_list_pluck( $post_categories, 'term_id' );
+		}
 
-		$post_tags    = get_the_terms( $post_id, 'post_tag' );
-		$post_tag_ids = empty( $post_tags ) ? array() : wp_list_pluck( $post_tags, 'term_id' );
+		if ( ! empty( $args['in_tag'] ) ) {
+			$post_tags             = get_the_terms( $post_id, 'post_tag' );
+			$query_args['tag__in'] = empty( $post_tags ) ? array() : wp_list_pluck( $post_tags, 'term_id' );
+		}
 
-		$query_args = array(
-			'category__in'           => $post_category_ids,
-			'tag__in'                => $post_tag_ids,
-			'post__not_in'           => array( $post_id ),
-			'posts_per_page'         => empty( $args['number'] ) ? 5 : abs( $args['number'] ),
-			'no_found_rows'          => true,
-			'update_post_meta_cache' => false,
-			'update_post_term_cache' => false,
+		$query_args = array_merge(
+			$query_args,
+			array(
+				'post__not_in'           => array( $post_id ),
+				'posts_per_page'         => empty( $args['number'] ) ? 5 : abs( $args['number'] ),
+				'no_found_rows'          => true,
+				'update_post_meta_cache' => false,
+				'update_post_term_cache' => false,
+			)
 		);
 
 		/**
