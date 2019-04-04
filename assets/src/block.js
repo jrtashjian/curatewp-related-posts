@@ -119,13 +119,13 @@ registerBlockType('curatewp/related-posts', {
 
                         <ToggleControl
                             label={__('In Category', 'cwprp')}
-                            help={in_category ? 'Including posts from the same categories.' : 'Toggle to show posts from the same categories.'}
+                            help={in_category ? __('Including posts from the same categories.', 'cwprp') : __('Toggle to show posts from the same categories.', 'cwprp')}
                             checked={in_category}
                             onChange={() => setAttributes({ in_category: !in_category })} />
 
                         <ToggleControl
                             label={__('In Tag', 'cwprp')}
-                            help={in_tag ? 'Including posts from the same tags.' : 'Toggle to show posts from the same tags.'}
+                            help={in_tag ? __('Including posts from the same tags.', 'cwprp') : __('Toggle to show posts from the same tags.', 'cwprp')}
                             checked={in_tag}
                             onChange={() => setAttributes({ in_tag: !in_tag })} />
 
