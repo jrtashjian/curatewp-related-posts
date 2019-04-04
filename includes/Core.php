@@ -31,30 +31,15 @@ class Core {
 		require_once CWPRP_PLUGIN_DIR . '/vendor/autoload.php';
 		require_once CWPRP_PLUGIN_DIR . '/includes/template-functions.php';
 
+		add_action( 'init', array( get_called_class(), 'load_textdomain' ) );
+		add_action( 'init', array( get_called_class(), 'register_block_type' ) );
+		add_filter( 'block_categories', array( get_called_class(), 'block_categories' ) );
+
 		add_action( 'wp_enqueue_scripts', array( get_called_class(), 'load_layout_styles' ) );
 		add_action( 'enqueue_block_assets', array( get_called_class(), 'load_layout_styles' ) );
 
 		add_action( 'widgets_init', array( get_called_class(), 'register_widgets' ) );
 		add_shortcode( 'curatewp_related_posts', array( get_called_class(), 'shortcode' ) );
-
-		// Ensure a block can be registered before we try and register one.
-		if ( function_exists( 'register_block_type' ) ) {
-			add_filter( 'block_categories', array( get_called_class(), 'block_categories' ) );
-			add_action( 'enqueue_block_assets', array( get_called_class(), 'load_block_assets' ) );
-			add_action( 'enqueue_block_editor_assets', array( get_called_class(), 'load_block_editor_assets' ) );
-
-			register_block_type(
-				'curatewp/related-posts',
-				array(
-					'attributes'      => array(
-						'number'      => array( 'type' => 'integer' ),
-						'title'       => array( 'type' => 'string' ),
-						'description' => array( 'type' => 'string' ),
-					),
-					'render_callback' => array( get_called_class(), 'render_block_related_posts' ),
-				)
-			);
-		}
 	}
 
 	/**
@@ -69,6 +54,15 @@ class Core {
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 		return is_plugin_active( 'curatewp/curatewp.php' );
+	}
+
+	/**
+	 * Load all translations for our plugin.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function load_textdomain() {
+		load_plugin_textdomain( 'cwprp', false, plugin_basename( CWPRP_PLUGIN_DIR ) . '/languages' );
 	}
 
 	/**
@@ -121,32 +115,49 @@ class Core {
 	}
 
 	/**
-	 * Load block assets for the front-end and block editor.
+	 * Register our block type if Gutenberg is active.
 	 *
 	 * @since 1.0.0
 	 */
-	public static function load_block_assets() {
-		wp_enqueue_style(
-			'cwprp-block-css',
+	public static function register_block_type() {
+
+		if ( ! function_exists( 'register_block_type' ) ) {
+			// Gutenberg is not active.
+			return;
+		}
+
+		wp_register_style(
+			'cwprp-block',
 			CWPRP_PLUGIN_URL . 'assets/dist/block.build.css',
 			array(),
 			CWPRP_VERSION
 		);
-	}
 
-	/**
-	 * Load block assets for the block editor.
-	 *
-	 * @since 1.0.0
-	 */
-	public static function load_block_editor_assets() {
-		wp_enqueue_script(
-			'cwprp-block-js',
+		wp_register_script(
+			'cwprp-block',
 			CWPRP_PLUGIN_URL . 'assets/dist/block.build.js',
 			array( 'wp-blocks', 'wp-i18n', 'wp-components', 'wp-data', 'wp-editor' ),
 			CWPRP_VERSION,
 			true // Enqueue script in the footer.
 		);
+
+		register_block_type(
+			'curatewp/related-posts',
+			array(
+				'editor_script'   => 'cwprp-block',
+				'editor_style'    => 'cwprp-block',
+				'attributes'      => array(
+					'number'      => array( 'type' => 'integer' ),
+					'title'       => array( 'type' => 'string' ),
+					'description' => array( 'type' => 'string' ),
+				),
+				'render_callback' => array( get_called_class(), 'render_block_related_posts' ),
+			)
+		);
+
+		if ( function_exists( 'wp_set_script_translations' ) ) {
+			wp_set_script_translations( 'cwprp-block', 'cwprp', CWPRP_PLUGIN_DIR . '/languages' );
+		}
 	}
 
 	/**
