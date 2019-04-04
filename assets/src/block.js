@@ -55,20 +55,21 @@ registerBlockType('curatewp/related-posts', {
         return {
             post_id: select('core/editor').getCurrentPostId(),
         };
-    })(function (props) {
+    })(function ({ post_id, setAttributes, attributes }) {
+        const { number, orderby, order, title, description, in_category, in_tag } = attributes;
         return (
             <div>
                 <InspectorControls>
                     <PanelBody initialOpen={true}>
                         <RangeControl
                             label={__('Number of posts to show', 'cwprp')}
-                            value={props.attributes.number}
+                            value={number}
                             min={1}
-                            onChange={(number) => props.setAttributes({ number })} />
+                            onChange={(number) => setAttributes({ number })} />
 
                         <SelectControl
                             label={__('Order by', 'cwprp')}
-                            value={`${props.attributes.orderby}/${props.attributes.order}`}
+                            value={`${orderby}/${order}`}
                             options={[
                                 {
                                     /* translators: label for ordering posts by date in descending order. */
@@ -98,42 +99,42 @@ registerBlockType('curatewp/related-posts', {
                             ]}
                             onChange={(value) => {
                                 const [newOrderBy, newOrder] = value.split('/');
-                                if (newOrder !== props.attributes.order) {
-                                    props.setAttributes({ order: newOrder });
+                                if (newOrder !== order) {
+                                    setAttributes({ order: newOrder });
                                 }
-                                if (newOrderBy !== props.attributes.orderby) {
-                                    props.setAttributes({ orderby: newOrderBy });
+                                if (newOrderBy !== orderby) {
+                                    setAttributes({ orderby: newOrderBy });
                                 }
                             }} />
 
                         <TextControl
                             label={__('Title', 'cwprp')}
-                            value={props.attributes.title}
-                            onChange={(title) => props.setAttributes({ title })} />
+                            value={title}
+                            onChange={(title) => setAttributes({ title })} />
 
                         <TextareaControl
                             label={__('Description', 'cwprp')}
-                            value={props.attributes.description}
-                            onChange={(description) => props.setAttributes({ description })} />
+                            value={description}
+                            onChange={(description) => setAttributes({ description })} />
 
                         <ToggleControl
                             label={__('In Category', 'cwprp')}
-                            help={props.attributes.in_category ? 'Including posts from the same categories.' : 'Toggle to show posts from the same categories.'}
-                            checked={props.attributes.in_category}
-                            onChange={() => props.setAttributes({ in_category: !props.attributes.in_category })} />
+                            help={in_category ? 'Including posts from the same categories.' : 'Toggle to show posts from the same categories.'}
+                            checked={in_category}
+                            onChange={() => setAttributes({ in_category: !in_category })} />
 
                         <ToggleControl
                             label={__('In Tag', 'cwprp')}
-                            help={props.attributes.in_tag ? 'Including posts from the same tags.' : 'Toggle to show posts from the same tags.'}
-                            checked={props.attributes.in_tag}
-                            onChange={() => props.setAttributes({ in_tag: !props.attributes.in_tag })} />
+                            help={in_tag ? 'Including posts from the same tags.' : 'Toggle to show posts from the same tags.'}
+                            checked={in_tag}
+                            onChange={() => setAttributes({ in_tag: !in_tag })} />
 
                     </PanelBody>
                 </InspectorControls>
                 <ServerSideRender
                     block="curatewp/related-posts"
-                    attributes={props.attributes}
-                    urlQueryArgs={{ post_id: props.post_id }}
+                    attributes={attributes}
+                    urlQueryArgs={{ post_id }}
                 />
             </div>
         );
