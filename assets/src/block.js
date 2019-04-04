@@ -3,7 +3,7 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const {
     ServerSideRender, PanelBody, SVG, Path,
-    RangeControl, TextControl, TextareaControl,
+    RangeControl, TextControl, TextareaControl, ToggleControl,
 } = wp.components;
 const { withSelect } = wp.data;
 const { InspectorControls } = wp.editor;
@@ -32,6 +32,14 @@ registerBlockType('curatewp/related-posts', {
         },
         description: {
             type: 'string',
+        },
+        in_category: {
+            type: 'boolean',
+            default: true,
+        },
+        in_tag: {
+            type: 'boolean',
+            default: false,
         },
     },
 
@@ -62,6 +70,18 @@ registerBlockType('curatewp/related-posts', {
                             label={__('Description', 'cwprp')}
                             value={props.attributes.description}
                             onChange={onChangeDescription} />
+
+                        <ToggleControl
+                            label={__('In Category', 'cwprp')}
+                            help={ props.attributes.in_category ? 'Including posts from the same categories.' : 'Toggle to show posts from the same categories.'}
+                            checked={props.attributes.in_category}
+                            onChange={() => props.setAttributes({ in_category: !props.attributes.in_category })} />
+
+                        <ToggleControl
+                            label={__('In Tag', 'cwprp')}
+                            help={ props.attributes.in_tag ? 'Including posts from the same tags.' : 'Toggle to show posts from the same tags.'}
+                            checked={props.attributes.in_tag}
+                            onChange={() => props.setAttributes({ in_tag: !props.attributes.in_tag })} />
                     </PanelBody>
                 </InspectorControls>
                 <ServerSideRender

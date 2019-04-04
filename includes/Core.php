@@ -151,6 +151,8 @@ class Core {
 					'number'      => array( 'type' => 'integer' ),
 					'title'       => array( 'type' => 'string' ),
 					'description' => array( 'type' => 'string' ),
+					'in_category' => array( 'type' => 'boolean' ),
+					'in_tag'      => array( 'type' => 'boolean' ),
 				),
 				'render_callback' => array( get_called_class(), 'render_block_related_posts' ),
 			)
