@@ -46,6 +46,10 @@ class Widget extends \WP_Widget {
 		$title       = ! empty( $instance['title'] ) ? $instance['title'] : '';
 		$description = ! empty( $instance['description'] ) ? $instance['description'] : '';
 		$number      = ! empty( $instance['number'] ) ? $instance['number'] : '';
+		$in_category = ! empty( $instance['in_category'] ) ? $instance['in_category'] : '';
+		$in_tag      = ! empty( $instance['in_tag'] ) ? $instance['in_tag'] : '';
+		$order       = ! empty( $instance['order'] ) ? $instance['order'] : '';
+		$orderby     = ! empty( $instance['orderby'] ) ? $instance['orderby'] : 'rand';
 
 		echo wp_kses_post( $args['before_widget'] );
 
@@ -55,6 +59,10 @@ class Widget extends \WP_Widget {
 					'title'       => $title,
 					'description' => $description,
 					'number'      => $number,
+					'in_category' => $in_category,
+					'in_tag'      => $in_tag,
+					'order'       => $order,
+					'orderby'     => $orderby,
 				)
 			)
 		);
@@ -88,6 +96,21 @@ class Widget extends \WP_Widget {
 			$instance['number'] = sanitize_text_field( $new_instance['number'] );
 		}
 
+		if ( ! empty( $new_instance['in_category'] ) ) {
+			$instance['in_category'] = sanitize_text_field( $new_instance['in_category'] );
+		}
+
+		if ( ! empty( $new_instance['in_tag'] ) ) {
+			$instance['in_tag'] = sanitize_text_field( $new_instance['in_tag'] );
+		}
+
+		if ( ! empty( $new_instance['orderby'] ) ) {
+			$orderby_values = explode( '/', $new_instance['orderby'] );
+
+			$instance['orderby'] = sanitize_text_field( $orderby_values[0] );
+			$instance['order']   = sanitize_text_field( $orderby_values[1] );
+		}
+
 		return $instance;
 	}
 
@@ -103,6 +126,12 @@ class Widget extends \WP_Widget {
 		$title       = isset( $instance['title'] ) ? $instance['title'] : '';
 		$description = isset( $instance['description'] ) ? $instance['description'] : '';
 		$number      = isset( $instance['number'] ) ? $instance['number'] : '';
+		$in_category = isset( $instance['in_category'] ) ? $instance['in_category'] : '';
+		$in_tag      = isset( $instance['in_tag'] ) ? $instance['in_tag'] : '';
+		$order       = isset( $instance['order'] ) ? $instance['order'] : '';
+		$orderby     = isset( $instance['orderby'] ) ? $instance['orderby'] : 'rand';
+
+		$orderby_value = $orderby . '/' . $order;
 		?>
 		<div class="curatewp-widget-form-controls">
 			<p>
@@ -132,6 +161,52 @@ class Widget extends \WP_Widget {
 					value="<?php echo esc_attr( $number ?: 5 ); ?>"
 					step="1"
 				/>
+			</p>
+			<p>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'orderby' ) ); ?>">
+					<?php esc_attr_e( 'Order by', 'cwprp' ); ?>
+				</label>
+				<select class="widefat"
+					id="<?php echo esc_attr( $this->get_field_id( 'orderby' ) ); ?>"
+					name="<?php echo esc_attr( $this->get_field_name( 'orderby' ) ); ?>">
+
+					<option value="date/desc" <?php selected( $orderby_value, 'date/desc' ); ?>>
+						<?php esc_html_e( 'Newest to Oldest', 'cwprp' ); ?>
+					</option>
+					<option value="date/asc" <?php selected( $orderby_value, 'date/asc' ); ?>>
+						<?php esc_html_e( 'Oldest to Newest', 'cwprp' ); ?>
+					</option>
+					<option value="title/asc" <?php selected( $orderby_value, 'title/asc' ); ?>>
+						<?php esc_html_e( 'A → Z', 'cwprp' ); ?>
+					</option>
+					<option value="title/desc" <?php selected( $orderby_value, 'title/desc' ); ?>>
+						<?php esc_html_e( 'Z → A', 'cwprp' ); ?>
+					</option>
+					<option value="rand/" <?php selected( $orderby_value, 'rand/' ); ?>>
+						<?php esc_html_e( 'Random', 'cwprp' ); ?>
+					</option>
+				</select>
+			</p>
+			<p>
+				<input type="checkbox" class="checkbox"
+					id="<?php echo esc_attr( $this->get_field_id( 'in_category' ) ); ?>"
+					name="<?php echo esc_attr( $this->get_field_name( 'in_category' ) ); ?>"
+					value="1"
+					<?php checked( $in_category ); ?>
+				/>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'in_category' ) ); ?>">
+					<?php esc_attr_e( 'In Category', 'cwprp' ); ?>
+				</label>
+				<br>
+				<input type="checkbox" class="checkbox"
+					id="<?php echo esc_attr( $this->get_field_id( 'in_tag' ) ); ?>"
+					name="<?php echo esc_attr( $this->get_field_name( 'in_tag' ) ); ?>"
+					value="1"
+					<?php checked( $in_tag ); ?>
+				/>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'in_tag' ) ); ?>">
+					<?php esc_attr_e( 'In Tag', 'cwprp' ); ?>
+				</label>
 			</p>
 		</div>
 		<?php
