@@ -1,4 +1,4 @@
-# CurateWP - Related Posts
+# Related Posts by CurateWP
 **Contributors:** jrtashjian\
 **Tags:** curatewp, curation, related, related posts, related content, recommended, engagement, similar, similar posts, gutenberg, block, shortcode\
 **Requires at least:** 4.9.8\
