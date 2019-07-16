@@ -2,9 +2,9 @@
 **Contributors:** jrtashjian\
 **Tags:** curatewp, curation, related, related posts, related content, recommended, engagement, similar, similar posts, gutenberg, block, shortcode\
 **Requires at least:** 4.9.8\
-**Tested up to:** 5.1.1\
+**Tested up to:** 5.2.2\
 **Requires PHP:** 5.6\
-**Stable tag:** 1.0.0\
+**Stable tag:** 1.0.1\
 **License:** GPLv2 or later\
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,11 @@ Minimal styles are provided for the layout to allow for easy customization while
 3. Activate the plugin through the 'Plugins' menu in WordPress
 
 ## Changelog
+
+### 1.0.1
+* Block no longer hangs on loading when no related posts are found.
+* Disabled click events on links while editing a post.
+* Added support for WP 5.2.2
 
 ### 1.0.0
 * Initial release.
