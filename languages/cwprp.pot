@@ -9,9 +9,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-04-05T06:39:43+00:00\n"
+"POT-Creation-Date: 2019-07-15T23:32:40-04:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.1.0\n"
+"X-Generator: WP-CLI 2.2.0\n"
 "X-Domain: cwprp\n"
 
 #. Plugin Name of the plugin
@@ -32,6 +32,11 @@ msgstr ""
 
 #. Author URI of the plugin
 msgid "https://jrtashjian.com"
+msgstr ""
+
+#. Translators: this message outputs a minimum PHP requirement.
+#: curatewp-related-posts.php:53
+msgid "Your version of PHP (%s) is below the minimum version of PHP required by CurateWP - Related Posts (5.6). Please contact your host and request that your version be upgraded to 5.6 or later."
 msgstr ""
 
 #: includes/Widget.php:31
@@ -55,47 +60,47 @@ msgid "Number of posts to show:"
 msgstr ""
 
 #: includes/Widget.php:167
-#: assets/src/block.js:80
+#: assets/src/block.js:81
 msgid "Order by"
 msgstr ""
 
 #. translators: label for ordering posts by date in descending order.
 #: includes/Widget.php:174
-#: assets/src/block.js:85
+#: assets/src/block.js:86
 msgid "Newest to Oldest"
 msgstr ""
 
 #. translators: label for ordering posts by date in ascending order.
 #: includes/Widget.php:177
-#: assets/src/block.js:90
+#: assets/src/block.js:91
 msgid "Oldest to Newest"
 msgstr ""
 
 #. translators: label for ordering posts by title in ascending order.
 #: includes/Widget.php:180
-#: assets/src/block.js:95
+#: assets/src/block.js:96
 msgid "A → Z"
 msgstr ""
 
 #. translators: label for ordering posts by title in descending order.
 #: includes/Widget.php:183
-#: assets/src/block.js:100
+#: assets/src/block.js:101
 msgid "Z → A"
 msgstr ""
 
 #. translators: label for randomly ordering posts.
 #: includes/Widget.php:186
-#: assets/src/block.js:105
+#: assets/src/block.js:106
 msgid "Random"
 msgstr ""
 
 #: includes/Widget.php:198
-#: assets/src/block.js:120
+#: assets/src/block.js:121
 msgid "In Category"
 msgstr ""
 
 #: includes/Widget.php:208
-#: assets/src/block.js:126
+#: assets/src/block.js:127
 msgid "In Tag"
 msgstr ""
 
@@ -103,59 +108,54 @@ msgstr ""
 msgid "CurateWP"
 msgstr ""
 
-#. Translators: this message outputs a minimum PHP requirement.
-#: curatewp-related-posts.php:53
-msgid "Your version of PHP (%s) is below the minimum version of PHP required by CurateWP - Related Posts (5.6). Please contact your host and request that your version be upgraded to 5.6 or later."
-msgstr ""
-
-#: assets/src/block.js:15
+#: assets/src/block.js:16
 msgid "Related Posts"
 msgstr ""
 
-#: assets/src/block.js:18
+#: assets/src/block.js:19
 msgid "Keep visitors engaged by highlighting relevant content."
 msgstr ""
 
-#: assets/src/block.js:20
+#: assets/src/block.js:21
 msgid "Get CurateWP"
 msgstr ""
 
-#: assets/src/block.js:29
+#: assets/src/block.js:30
 msgid "related"
 msgstr ""
 
-#: assets/src/block.js:30
+#: assets/src/block.js:31
 msgid "engagement"
 msgstr ""
 
-#: assets/src/block.js:31
+#: assets/src/block.js:32
 msgid "similar"
 msgstr ""
 
-#: assets/src/block.js:74
+#: assets/src/block.js:75
 msgid "Number of posts to show"
 msgstr ""
 
-#: assets/src/block.js:121
+#: assets/src/block.js:122
 msgid "Including posts from the same categories."
 msgstr ""
 
-#: assets/src/block.js:121
+#: assets/src/block.js:122
 msgid "Toggle to show posts from the same categories."
 msgstr ""
 
-#: assets/src/block.js:127
+#: assets/src/block.js:128
 msgid "Including posts from the same tags."
 msgstr ""
 
-#: assets/src/block.js:127
+#: assets/src/block.js:128
 msgid "Toggle to show posts from the same tags."
 msgstr ""
 
-#: assets/src/block.js:138
+#: assets/src/block.js:139
 msgid "Title for section"
 msgstr ""
 
-#: assets/src/block.js:149
+#: assets/src/block.js:150
 msgid "Description for section..."
 msgstr ""
