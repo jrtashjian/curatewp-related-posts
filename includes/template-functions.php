@@ -63,14 +63,12 @@ function curatewp_related_posts( $args = array() ) {
 
 		$posts_query = new \WP_Query( $query_args );
 
-		if ( ! $posts_query->have_posts() ) {
-			return '';
-		}
-
 		$related_posts = array_merge(
 			$related_posts,
 			wp_list_pluck( $posts_query->posts, 'ID' )
 		);
+
+		wp_reset_postdata();
 
 		/**
 		 * Filters the related post ids for the section.
@@ -99,7 +97,14 @@ function curatewp_related_posts( $args = array() ) {
 	$classes[] = 'curatewp-section-' . $section_id;
 	$classes[] = 'curatewp-section-related-posts';
 
-	wp_reset_postdata();
+	if ( empty( $related_posts ) ) {
+		return sprintf(
+			'<div class="%1$s">%2$s</div>',
+			esc_attr( join( ' ', array_filter( $classes ) ) ),
+			__( 'No posts to show.' )
+		);
+	}
+
 	ob_start();
 	?>
 
