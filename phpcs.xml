@@ -3,10 +3,13 @@
 	<description>Rules for CurateWP</description>
 
     <arg name="extensions" value="php" />
-    <file>.</file>
+    <arg name="basepath" value="./" />
+    <file>./</file>
 
-    <exclude-pattern>*/vendor/*</exclude-pattern>
-    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>build/*</exclude-pattern>
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>node_modules/*</exclude-pattern>
+    <exclude-pattern>wordpress/*</exclude-pattern>
 
 	<arg name="colors"/>
 	<arg value="sp"/>
