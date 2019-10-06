@@ -109,45 +109,43 @@ function curatewp_related_posts( $args = array() ) {
 	?>
 
 	<div class="<?php echo esc_attr( join( ' ', array_filter( $classes ) ) ); ?>">
-		<div class="curatewp-section-header">
-			<?php if ( ! empty( $args['title'] ) ) : ?>
+		<?php if ( ! empty( $args['title'] ) ) : ?>
+			<div class="curatewp-section-header">
 				<h3 class="curatewp-section-header__title"><?php echo esc_html( $args['title'] ); ?></h3>
-			<?php endif; ?>
 
-			<?php if ( ! empty( $args['description'] ) ) : ?>
-				<p class="curatewp-section-header__description"><?php echo esc_html( $args['description'] ); ?></p>
-			<?php endif; ?>
-		</div>
-
-		<?php if ( ! empty( $related_posts ) ) : ?>
-			<div class="curatewp-section-collection curatewp-section-collection--default">
-
-				<?php foreach ( $related_posts as $related_post_id ) : ?>
-					<div <?php post_class( 'curatewp-card curatewp-card--wide curatewp-grid--whole', $related_post_id ); ?>>
-
-						<?php
-						if ( has_post_thumbnail( $related_post_id ) ) :
-							$curatewp_post_thumbnail_url = wp_get_attachment_url( get_post_thumbnail_id( $related_post_id ) );
-							?>
-							<div class="curatewp-card__image" style="background-image:url(<?php echo esc_url( $curatewp_post_thumbnail_url ); ?>);"></div>
-						<?php endif; ?>
-
-						<div class="curatewp-card__content">
-							<h4 class="curatewp-card__title">
-								<a href="<?php the_permalink( $related_post_id ); ?>">
-									<?php echo esc_html( get_the_title( $related_post_id ) ); ?>
-								</a>
-							</h4>
-							<div class="curatewp-card__date">
-								<?php echo esc_html( get_the_date( '', $related_post_id ) ); ?>
-							</div>
-						</div>
-
-					</div>
-				<?php endforeach; ?>
-
+				<?php if ( ! empty( $args['description'] ) ) : ?>
+					<p class="curatewp-section-header__description"><?php echo esc_html( $args['description'] ); ?></p>
+				<?php endif; ?>
 			</div>
 		<?php endif; ?>
+
+		<div class="curatewp-section-collection curatewp-section-collection--default">
+
+			<?php foreach ( $related_posts as $related_post_id ) : ?>
+				<div <?php post_class( 'curatewp-card curatewp-card--wide curatewp-grid--whole', $related_post_id ); ?>>
+
+					<?php
+					if ( has_post_thumbnail( $related_post_id ) ) :
+						$curatewp_post_thumbnail_url = wp_get_attachment_url( get_post_thumbnail_id( $related_post_id ) );
+						?>
+						<div class="curatewp-card__image" style="background-image:url(<?php echo esc_url( $curatewp_post_thumbnail_url ); ?>);"></div>
+					<?php endif; ?>
+
+					<div class="curatewp-card__content">
+						<h4 class="curatewp-card__title">
+							<a href="<?php the_permalink( $related_post_id ); ?>">
+								<?php echo esc_html( get_the_title( $related_post_id ) ); ?>
+							</a>
+						</h4>
+						<div class="curatewp-card__date">
+							<?php echo esc_html( get_the_date( '', $related_post_id ) ); ?>
+						</div>
+					</div>
+
+				</div>
+			<?php endforeach; ?>
+
+		</div>
 	</div>
 
 	<?php
