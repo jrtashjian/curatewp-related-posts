@@ -107,7 +107,7 @@ class Core {
 		if ( $load_layout_css ) {
 			wp_enqueue_style(
 				'cwprp-layouts',
-				CWPRP_PLUGIN_URL . 'assets/dist/layouts.build.css',
+				CWPRP_PLUGIN_URL . 'build/layouts.css',
 				array(),
 				CWPRP_VERSION
 			);
@@ -126,18 +126,13 @@ class Core {
 			return;
 		}
 
-		wp_register_style(
-			'cwprp-block',
-			CWPRP_PLUGIN_URL . 'assets/dist/block.build.css',
-			array(),
-			CWPRP_VERSION
-		);
+		$asset_file = include CWPRP_PLUGIN_DIR . '/build/index.asset.php';
 
 		wp_register_script(
 			'cwprp-block',
-			CWPRP_PLUGIN_URL . 'assets/dist/block.build.js',
-			array( 'wp-blocks', 'wp-i18n', 'wp-components', 'wp-data', 'wp-editor', 'wp-element' ),
-			CWPRP_VERSION,
+			CWPRP_PLUGIN_URL . 'build/index.js',
+			$asset_file['dependencies'],
+			$asset_file['version'],
 			true // Enqueue script in the footer.
 		);
 

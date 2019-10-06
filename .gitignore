@@ -2,4 +2,7 @@
 .cache/
 .DS_Store
 node_modules/
-assets/dist/layouts.build.js
+build/
+release/
+wordpress/
+vendor/

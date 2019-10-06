@@ -1,24 +1,19 @@
 {
     "private": true,
     "scripts": {
-        "watch": "cross-env webpack --watch",
-        "build": "cross-env NODE_ENV=production webpack",
-        "i18n": "npm run i18n-pot && npm run i18n-json && npm run i18n-mo",
-        "i18n-pot": "wp i18n make-pot ./ ./languages/cwprp.pot --headers='{\"Last-Translator\":\"JR Tashjian <jr@curatewp.com>\",\"Language-Team\":\"CurateWP <info@curatewp.com>\"}' && cp ./languages/cwprp.pot ./languages/cwprp-en_US.po",
-        "i18n-json": "wp i18n make-json languages/",
-        "i18n-mo": "for file in `find . -name \"*.po\"` ; do msgfmt -o ${file/.po/.mo} $file ; done"
+        "build": "wp-scripts build && npm run scripts",
+        "start": "npm run scripts && wp-scripts start & npm run scripts:watch",
+        "scripts": "node-sass ./src/layouts.scss --output build --output-style compressed",
+        "scripts:watch": "npm run scripts -- --watch",
+        "env": "wp-scripts env"
     },
     "devDependencies": {
-        "@babel/core": "^7.5.4",
-        "@babel/preset-env": "^7.5.4",
-        "@babel/preset-react": "^7.0.0",
-        "babel-loader": "^8.0.6",
-        "cross-env": "^5.2.0",
-        "css-loader": "^2.1.1",
-        "mini-css-extract-plugin": "^0.5.0",
-        "node-sass": "^4.12.0",
-        "sass-loader": "^7.1.0",
-        "webpack": "^4.35.3",
-        "webpack-cli": "^3.3.6"
+        "@wordpress/scripts": "5.0.1",
+        "node-sass": "^4.12.0"
+    },
+    "wp-env": {
+        "plugin-dir": "curatewp-related-posts",
+        "plugin-name": "Related Posts by CurateWP",
+        "welcome-build-command": "npm run build"
     }
 }
