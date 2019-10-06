@@ -1,10 +1,6 @@
 # Related Posts by CurateWP
-**Contributors:** jrtashjian\
-**Tags:** curatewp, curation, related, related posts, related content, recommended, engagement, similar, similar posts, gutenberg, block, shortcode\
-**Requires at least:** 4.9.8\
-**Tested up to:** 5.2.2\
-**Requires PHP:** 5.6\
-**Stable tag:** 1.0.1\
+**Version:** 1.0.1
+
 **License:** GPLv2 or later\
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,16 +17,15 @@ Minimal styles are provided for the layout to allow for easy customization while
 
 ## Installation
 
-1. Download the plugin and extract the files
-2. Upload `curatewp-related-posts` to your `~/wp-content/plugins/` directory
-3. Activate the plugin through the 'Plugins' menu in WordPress
+1. Download the plugin from the [WordPress plugin directory](https://wordpress.org/plugins/curatewp-related-posts/) and extract the files.
+2. Upload `curatewp-related-posts` to your `~/wp-content/plugins/` directory.
+3. Activate the plugin through the 'Plugins' menu in WordPress.
 
-## Changelog
+## Development
+1. Clone the GitHub repository: `https://github.com/jrtashjian/curatewp-related-posts.git`
+2. Browse to the folder in the command line.
+3. Run the `npm run env install` command to setup a local WordPress installation and development environment with Docker.
+4. Run the `npm start` command for development.
 
-### 1.0.1
-* Block no longer hangs on loading when no related posts are found.
-* Disabled click events on links while editing a post.
-* Added support for WP 5.2.2
-
-### 1.0.0
-* Initial release.
+## Support
+Need help? Please visit the [support forum on WordPress.org](https://wordpress.org/support/plugin/curatewp-related-posts/) for assistance.
