@@ -13,3 +13,4 @@ npm install && npm run build
 cd $WORKING_DIR
 
 rsync -av --progress --exclude={'.*','wordpress','node_modules','src','release','.gitignore','composer.*','package*','phpcs.xml','README.md'} release/repo/* release/$PLUGIN
+rm -rf release/repo
