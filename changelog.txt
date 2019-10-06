@@ -1,0 +1,14 @@
+== Changelog ==
+
+= 1.1.0 =
+* The section title and description is deprecated within the block
+* Added support for WP 5.2.3
+* Added support for Gutenberg 6.6.0
+
+= 1.0.1 =
+* Block no longer hangs on loading when no related posts are found.
+* Disabled click events on links while editing a post.
+* Added support for WP 5.2.2
+
+= 1.0.0 =
+* Initial release.
