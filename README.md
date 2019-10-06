@@ -4,8 +4,6 @@
 **License:** GPLv2 or later\
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
-Keep visitors engaged on your blog by highlighting relevant content of each published post.
-
 ## Description
 **Does not require** [CurateWP](https://curatewp.com).
 
