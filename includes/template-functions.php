@@ -92,7 +92,7 @@ function curatewp_related_posts( $args = array() ) {
 	}
 
 	// Convert class string to array and append additional wrapper classes.
-	$classes   = explode( ' ', $args['class'] );
+	$classes   = empty( $args['class'] ) ? array() : explode( ' ', $args['class'] );
 	$classes[] = 'curatewp-section';
 	$classes[] = 'curatewp-section-' . $section_id;
 	$classes[] = 'curatewp-section-related-posts';
