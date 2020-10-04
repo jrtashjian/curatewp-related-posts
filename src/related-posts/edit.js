@@ -8,14 +8,16 @@ import {
 	ServerSideRender,
 	PanelBody,
 	RangeControl,
-    SelectControl,
-    ToggleControl,
+	SelectControl,
+	ToggleControl,
 	Disabled,
 	Button,
 } from '@wordpress/components';
 import { createBlock } from '@wordpress/blocks';
-import { InspectorControls } from '@wordpress/editor';
-import { Warning } from '@wordpress/block-editor';
+import {
+	InspectorControls,
+	Warning,
+} from '@wordpress/block-editor';
 
 class RelatedPostsEdit extends Component {
 	constructor() {
@@ -46,17 +48,17 @@ class RelatedPostsEdit extends Component {
 		this.deprecateSectionDetails();
 	}
 
-    render() {
-        const { attributes, setAttributes, isSelected, postID } = this.props;
-        const { in_category, in_tag, number, orderby, order } = attributes;
+	render() {
+		const { attributes, setAttributes, isSelected, postID } = this.props;
+		const { in_category, in_tag, number, orderby, order } = attributes;
 
 		return (
 			<div>
 				{ isSelected && attributes.title &&
 					<Warning
 						actions={ [
-							<Button isDefault isLarge onClick={ this.deprecateSectionDetails }>{ __( 'Remove', 'cwprp' ) }</Button>,
-							<Button isPrimary isLarge onClick={ this.convertSectionDetails }>{ __( 'Convert to Blocks', 'cwprp' ) }</Button>,
+							<Button key="remove" isDefault onClick={ this.deprecateSectionDetails }>{ __( 'Remove', 'cwprp' ) }</Button>,
+							<Button key="convert" isPrimary onClick={ this.convertSectionDetails }>{ __( 'Convert to Blocks', 'cwprp' ) }</Button>,
 						] }>
 						{ __( 'Section title and description has been deprecated.', 'cwprp' ) }
 					</Warning>
@@ -67,7 +69,7 @@ class RelatedPostsEdit extends Component {
 							label={ __( 'Number of posts to show', 'cwprp' ) }
 							value={ number }
 							min={ 1 }
-							onChange={ ( number ) => setAttributes( { number } ) } />
+							onChange={ ( newNumber ) => setAttributes( { number: newNumber } ) } />
 
 						<SelectControl
 							label={ __( 'Order by', 'cwprp' ) }
@@ -93,11 +95,11 @@ class RelatedPostsEdit extends Component {
 									label: __( 'Z → A', 'cwprp' ),
 									value: 'title/desc',
 								},
-                                {
-                                    /* translators: label for randomly ordering posts. */
-                                    label: __('Random', 'cwprp'),
-                                    value: 'rand/',
-                                },
+								{
+									/* translators: label for randomly ordering posts. */
+									label: __( 'Random', 'cwprp' ),
+									value: 'rand/',
+								},
 							] }
 							onChange={ ( value ) => {
 								const [ newOrderBy, newOrder ] = value.split( '/' );
@@ -109,17 +111,17 @@ class RelatedPostsEdit extends Component {
 								}
 							} } />
 
-                        <ToggleControl
-                            label={ __( 'In Category', 'cwprp' ) }
-                            help={ in_category ? __( 'Including posts from the same categories.', 'cwprp' ) : __( 'Toggle to show posts from the same categories.', 'cwprp' ) }
-                            checked={ in_category }
-                            onChange={ () => setAttributes( { in_category: ! in_category } ) } />
+						<ToggleControl
+							label={ __( 'In Category', 'cwprp' ) }
+							help={ in_category ? __( 'Including posts from the same categories.', 'cwprp' ) : __( 'Toggle to show posts from the same categories.', 'cwprp' ) }
+							checked={ in_category }
+							onChange={ () => setAttributes( { in_category: ! in_category } ) } />
 
-                        <ToggleControl
-                            label={ __( 'In Tag', 'cwprp' ) }
-                            help={ in_tag ? __( 'Including posts from the same tags.', 'cwprp' ) : __( 'Toggle to show posts from the same tags.', 'cwprp' ) }
-                            checked={ in_tag }
-                            onChange={ () => setAttributes( { in_tag: ! in_tag } ) } />
+						<ToggleControl
+							label={ __( 'In Tag', 'cwprp' ) }
+							help={ in_tag ? __( 'Including posts from the same tags.', 'cwprp' ) : __( 'Toggle to show posts from the same tags.', 'cwprp' ) }
+							checked={ in_tag }
+							onChange={ () => setAttributes( { in_tag: ! in_tag } ) } />
 
 					</PanelBody>
 				</InspectorControls>
@@ -133,10 +135,10 @@ class RelatedPostsEdit extends Component {
 
 			</div>
 		);
-    };
+	}
 }
 
-export default withSelect( select => {
+export default withSelect( ( select ) => {
 	const { getCurrentPostId, getBlockIndex } = select( 'core/editor' );
 
 	return {

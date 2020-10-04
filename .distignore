@@ -1,0 +1,11 @@
+.*
+package*
+composer*
+phpcs.xml
+webpack*
+README.md
+
+node_modules
+
+release
+wordpress

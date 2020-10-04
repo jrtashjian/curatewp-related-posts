@@ -1,19 +1,20 @@
 {
     "private": true,
     "scripts": {
-        "build": "wp-scripts build && npm run scripts",
-        "start": "npm run scripts && wp-scripts start & npm run scripts:watch",
-        "scripts": "node-sass ./src/layouts.scss --output build --output-style compressed",
-        "scripts:watch": "npm run scripts -- --watch",
-        "env": "wp-scripts env"
+        "start": "wp-scripts start",
+        "build": "wp-scripts build",
+        "clean": "wp-env stop; rm -rf build dist node_modules vendor wordpress",
+        "env": "wp-env",
+        "lint-js": "wp-scripts lint-js",
+        "lint-php": "wp-env run composer run-script lint"
     },
     "devDependencies": {
-        "@wordpress/scripts": "5.0.1",
-        "node-sass": "^4.12.0"
+        "@wordpress/env": "2.0.0",
+        "@wordpress/scripts": "^12.2.1"
     },
-    "wp-env": {
-        "plugin-dir": "curatewp-related-posts",
-        "plugin-name": "Related Posts by CurateWP",
-        "welcome-build-command": "npm run build"
+    "dependencies": {
+        "@wordpress/base-styles": "2.0.1",
+        "@wordpress/icons": "2.4.0",
+        "classnames": "^2.2.5"
     }
 }

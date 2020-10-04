@@ -7,6 +7,7 @@ import { registerBlockType } from '@wordpress/blocks';
  * Internal dependencies
  */
 import * as relatedPosts from './related-posts';
+import './style.scss';
 
 /**
  * Function to register an individual block.
@@ -14,7 +15,7 @@ import * as relatedPosts from './related-posts';
  * @param {Object} block The block to be registered.
  *
  */
-const registerBlock = block => {
+const registerBlock = ( block ) => {
 	const { settings, name } = block;
 	registerBlockType( name, settings );
 };

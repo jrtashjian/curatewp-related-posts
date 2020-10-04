@@ -1,7 +1,13 @@
 {
     "name": "jrtashjian/curatewp-related-posts",
     "description": "Curate your WordPress content",
-    "keywords": [ "wordpress", "curate", "curation", "news", "related posts" ],
+    "keywords": [
+        "wordpress",
+        "curate",
+        "curation",
+        "news",
+        "related posts"
+    ],
     "type": "wordpress-plugin",
     "authors": [
         {
@@ -18,12 +24,18 @@
         "php": ">=5.6"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "^3.5",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
         "phpcompatibility/phpcompatibility-wp": "^2.1",
-        "wp-coding-standards/wpcs": "^2.1"
+        "squizlabs/php_codesniffer": "^3.5",
+        "wp-cli/dist-archive-command": "^2.0",
+        "wp-cli/wp-cli-bundle": "^2.4",
+        "wp-coding-standards/wpcs": "^2.1",
+        "johnpbloch/wordpress-core": "^5.5"
     },
     "scripts": {
-        "lint": "@php ./vendor/bin/phpcs"
+        "format": "@php ./vendor/bin/phpcbf",
+        "lint": "@php ./vendor/bin/phpcs",
+        "build-release": "wp dist-archive ./",
+        "makepot": "npm run build && wp i18n make-pot . --exclude=\"node_modules,vendor,wordpress\" --headers='{\"Last-Translator\":\"info@curatewp.com\",\"Language-Team\":\"info@curatewp.com\",\"Report-Msgid-Bugs-To\":\"https://curatewp.com/contact\"}'"
     }
 }

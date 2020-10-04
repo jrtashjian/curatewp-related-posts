@@ -107,7 +107,7 @@ class Core {
 		if ( $load_layout_css ) {
 			wp_enqueue_style(
 				'cwprp-layouts',
-				CWPRP_PLUGIN_URL . 'build/layouts.css',
+				CWPRP_PLUGIN_URL . 'build/style-index.css',
 				array(),
 				CWPRP_VERSION
 			);

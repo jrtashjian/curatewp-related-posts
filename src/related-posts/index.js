@@ -14,7 +14,7 @@ import icon from './icon';
 export const name = 'curatewp/related-posts';
 
 export const settings = {
-    title: __( 'Related Posts', 'cwprp' ),
+	title: __( 'Related Posts', 'cwprp' ),
 	description: (
 		<Fragment>
 			<p>{ __( 'Keep visitors engaged by highlighting relevant content.' ) }</p>
@@ -22,10 +22,10 @@ export const settings = {
 				{ __( 'Get CurateWP', 'cwprp' ) }
 			</ExternalLink>
 		</Fragment>
-    ),
-    icon,
-    category: 'curatewp',
-    keywords: [ __( 'related', 'cwprp' ), __( 'engagement', 'cwprp' ), __( 'similar', 'cwprp' ) ],
+	),
+	icon,
+	category: 'curatewp',
+	keywords: [ __( 'related', 'cwprp' ), __( 'engagement', 'cwprp' ), __( 'similar', 'cwprp' ) ],
 	edit,
 	save: () => null,
 };

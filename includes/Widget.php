@@ -125,7 +125,7 @@ class Widget extends \WP_Widget {
 	public function form( $instance ) {
 		$title       = isset( $instance['title'] ) ? $instance['title'] : '';
 		$description = isset( $instance['description'] ) ? $instance['description'] : '';
-		$number      = isset( $instance['number'] ) ? $instance['number'] : '';
+		$number      = isset( $instance['number'] ) ? $instance['number'] : 5;
 		$in_category = isset( $instance['in_category'] ) ? $instance['in_category'] : '';
 		$in_tag      = isset( $instance['in_tag'] ) ? $instance['in_tag'] : '';
 		$order       = isset( $instance['order'] ) ? $instance['order'] : '';
@@ -158,7 +158,7 @@ class Widget extends \WP_Widget {
 				<input type="number" class="tiny-text"
 					id="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>"
 					name="<?php echo esc_attr( $this->get_field_name( 'number' ) ); ?>"
-					value="<?php echo esc_attr( $number ?: 5 ); ?>"
+					value="<?php echo esc_attr( $number ); ?>"
 					step="1"
 				/>
 			</p>
