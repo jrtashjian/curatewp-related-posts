@@ -4,7 +4,7 @@
 Plugin Name: CurateWP - Related Posts
 Plugin URI: https://curatewp.com/
 Description: Display related posts within the current post, in a widget, and in your theme.
-Version: 1.2.1
+Version: 1.2.2
 Author: JR Tashjian
 Author URI: https://jrtashjian.com
 Text Domain: cwprp
@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'CWPRP_VERSION', '1.2.1' );
+define( 'CWPRP_VERSION', '1.2.2' );
 define( 'CWPRP_PLUGIN_DIR', dirname( __FILE__ ) );
 define( 'CWPRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
