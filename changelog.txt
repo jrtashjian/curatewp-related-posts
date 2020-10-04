@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 1.2.2 =
+* Fix missing composer autoloader
+
 = 1.2.1 =
 * Fix missing composer autoloader
 
