@@ -1,12 +1,12 @@
 .*
-package*
-yarn*
-composer*
+package.*
+yarn.*
+composer.*
 phpcs.xml
-webpack*
+webpack.*
 README.md
 
-src
-node_modules
-release
-wordpress
+src/
+node_modules/
+release/
+wordpress/
