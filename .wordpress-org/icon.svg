@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>related posts icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="related-posts-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FFD700" x="0" y="0" width="256" height="256"></rect>
+        <g id="baseline-share-24px" transform="translate(-104.000000, -52.000000)">
+            <polygon id="Path" points="0 0 360 0 360 360 0 360"></polygon>
+            <path d="M270,241.2 C258.6,241.2 248.4,245.7 240.6,252.75 L133.65,190.5 C134.4,187.05 135,183.6 135,180 C135,176.4 134.4,172.95 133.65,169.5 L239.4,107.85 C247.5,115.35 258.15,120 270,120 C294.9,120 315,99.9 315,75 C315,50.1 294.9,30 270,30 C245.1,30 225,50.1 225,75 C225,78.6 225.6,82.05 226.35,85.5 L120.6,147.15 C112.5,139.65 101.85,135 90,135 C65.1,135 45,155.1 45,180 C45,204.9 65.1,225 90,225 C101.85,225 112.5,220.35 120.6,212.85 L227.4,275.25 C226.65,278.4 226.2,281.7 226.2,285 C226.2,309.15 245.85,328.8 270,328.8 C294.15,328.8 313.8,309.15 313.8,285 C313.8,260.85 294.15,241.2 270,241.2 Z" id="Path" fill="#E6C200" fill-rule="nonzero"></path>
+        </g>
+        <text id="CurateWP" font-family="Laila-Bold, Laila" font-size="24" font-weight="bold" fill="#191500">
+            <tspan x="67.016" y="155">CurateWP</tspan>
+        </text>
+        <text id="Related-Posts" font-family="Laila-Regular, Laila" font-size="32" font-weight="normal" line-spacing="38" fill="#191500">
+            <tspan x="28" y="126">Related Posts</tspan>
+        </text>
+    </g>
+</svg>
