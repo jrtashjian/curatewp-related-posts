@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 1.2.0 =
+* Added support for WP 5.5.1
+
 = 1.1.0 =
 * The section title and description is deprecated within the block
 * Added support for WP 5.2.3

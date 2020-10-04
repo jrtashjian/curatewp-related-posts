@@ -4,18 +4,18 @@
 Plugin Name: CurateWP - Related Posts
 Plugin URI: https://curatewp.com/
 Description: Display related posts within the current post, in a widget, and in your theme.
-Version: 1.1.0
+Version: 1.2.0
 Author: JR Tashjian
 Author URI: https://jrtashjian.com
 Text Domain: cwprp
 Domain Path: languages
 
-Copyright 2019 JR Tashjian
+Copyright 2019-2020 JR Tashjian
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'CWPRP_VERSION', '1.0.1' );
+define( 'CWPRP_VERSION', '1.2.0' );
 define( 'CWPRP_PLUGIN_DIR', dirname( __FILE__ ) );
 define( 'CWPRP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
